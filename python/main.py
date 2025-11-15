@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
 import pandas as pd
+from matplotlib_scalebar.scalebar import ScaleBar
 
 datos = pd.read_csv('C:/Users/ricar/Documents/ExpoIngenieria2025/python/puntos_de_impacto.csv')
 
@@ -21,7 +22,7 @@ for i in range(len(puntos_x)):
 if np.max(densidad) > 0:
     densidad = densidad / np.max(densidad)
 
-plt.figure()
+fig, ax = plt.subplots()
 
 n = 256
 colors = np.zeros((n, 3))
@@ -39,6 +40,10 @@ plt.title('Mapa de Riesgo Volcánico')
 plt.axis('equal')
 plt.legend('Escala 1:100')
 plt.grid(True, alpha=0.3)
+
+scalebar = ScaleBar(100, 'm', length_fraction=0.25, location='lower left',
+                    box_alpha=0.7, color='black', font_properties={'size': 10})
+ax.add_artist(scalebar)
 
 plt.savefig('mapa_riesgo.png',dpi=300)
 plt.show()
