@@ -33,7 +33,7 @@ def mapa_euler():
 
     plt.xlabel('Distancia Escala 1:100')
     plt.ylabel('Distancia Escala 1:100')
-    plt.title('Mapa de Riesgo Volcánico')
+    plt.title('Mapa de Riesgo Volcánico (Euler)')
     plt.grid(True, alpha=0.3)
 
     scalebar = ScaleBar(100, 'm', length_fraction=0.25, location='lower left', color='black')
