@@ -23,12 +23,12 @@ def mapa_euler():
     if np.max(densidad) > 0:
         densidad = densidad / np.max(densidad)
 
-    fig, ax = plt.subplots()
+    fig1, ax1 = plt.subplots()
 
     n = 256
-    colors = np.ones((n, 3))  # Empezar todo en blanco (1, 1, 1)
-    colors[:, 1] = np.linspace(1, 0, n)  # Verde: de 1 a 0
-    colors[:, 2] = np.linspace(1, 0, n)  # Azul: de 1 a 0
+    colors = np.ones((n, 3)) 
+    colors[:, 1] = np.linspace(1, 0, n)
+    colors[:, 2] = np.linspace(1, 0, n)
     cmap = ListedColormap(colors)
 
     plt.contourf(X, Y, densidad, levels=20, cmap=cmap)
@@ -38,15 +38,14 @@ def mapa_euler():
     plt.ylabel('Y (km)')
     plt.title('Mapa de Riesgo Volcánico')
     plt.axis('equal')
-    plt.legend('Escala 1:100')
     plt.grid(True, alpha=0.3)
 
-    scalebar = ScaleBar(100, 'm', length_fraction=0.25, location='lower left',
-                        box_alpha=0.7, color='black', font_properties={'size': 10})
-    ax.add_artist(scalebar)
+    scalebar = ScaleBar(100, 'm', length_fraction=0.25, location='lower left', box_alpha=0.7, color='black', font_properties={'size': 10})
+    ax1.add_artist(scalebar)
 
     plt.savefig('mapa_riesgo.png',dpi=300)
-    plt.show()
+    plt.show(block=False)
+    plt.pause(5)
 def mapa_rk4():
     datos_rk4 = pd.read_csv('C:/Users/ricar/Documents/ExpoIngenieria2025/python/puntos_de_impacto_rk4.csv')
 
@@ -66,12 +65,12 @@ def mapa_rk4():
     if np.max(densidad) > 0:
         densidad = densidad / np.max(densidad)
 
-    fig, ax = plt.subplots()
+    fig2, ax2 = plt.subplots()
 
     n = 256
-    colors = np.ones((n, 3))  # Empezar todo en blanco (1, 1, 1)
-    colors[:, 0] = np.linspace(1, 0, n)  # Rojo: de 1 a 0
-    colors[:, 1] = np.linspace(1, 0, n)  # Verde: de 1 a 0
+    colors = np.ones((n, 3))  
+    colors[:, 0] = np.linspace(1, 0, n)  
+    colors[:, 1] = np.linspace(1, 0, n) 
     cmap = ListedColormap(colors)
 
     plt.contourf(X, Y, densidad, levels=20, cmap=cmap)
@@ -81,13 +80,13 @@ def mapa_rk4():
     plt.ylabel('Y (km)')
     plt.title('Mapa de Riesgo Volcánico (RK4)')
     plt.axis('equal')
-    plt.legend('Escala 1:100')
     plt.grid(True, alpha=0.3)
 
-    scalebar = ScaleBar(100, 'm', length_fraction=0.25, location='lower left',
-                        box_alpha=0.7, color='black', font_properties={'size': 10})
-    ax.add_artist(scalebar)
+    scalebar = ScaleBar(100, 'm', length_fraction=0.25, location='lower left', box_alpha=0.7, color='black', font_properties={'size': 10})
+    ax2.add_artist(scalebar)
 
     plt.savefig('mapa_riesgo_rk4.png',dpi=300)
-    plt.show()
+    plt.show(block=False)
+    plt.pause(5)
 mapa_rk4()
+mapa_euler()
