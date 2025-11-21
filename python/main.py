@@ -20,9 +20,6 @@ def mapa_euler():
         distancia = np.sqrt((X - puntos_x_e[i])**2 + (Y - puntos_y_e[i])**2)
         densidad += np.exp(-(distancia**2) / (2 * sigma**2))
 
-    if np.max(densidad) > 0:
-        densidad = densidad / np.max(densidad)
-
     fig1, ax1 = plt.subplots()
 
     n = 256
@@ -34,13 +31,12 @@ def mapa_euler():
     plt.contourf(X, Y, densidad, levels=20, cmap=cmap)
     plt.colorbar(label='Nivel de Riesgo')
 
-    plt.xlabel('X (km)')
-    plt.ylabel('Y (km)')
-    plt.title('Mapa de Riesgo Volcánico')
-    plt.axis('equal')
+    plt.xlabel('Distancia Escala 1:100')
+    plt.ylabel('Distancia Escala 1:100')
+    plt.title('Mapa de Riesgo Volcánico (Euler)')
     plt.grid(True, alpha=0.3)
 
-    scalebar = ScaleBar(100, 'm', length_fraction=0.25, location='lower left', box_alpha=0.7, color='black', font_properties={'size': 10})
+    scalebar = ScaleBar(100, 'm', length_fraction=0.25, location='lower left', color='black')
     ax1.add_artist(scalebar)
 
     plt.savefig('mapa_riesgo.png',dpi=300)
@@ -62,9 +58,6 @@ def mapa_rk4():
         distancia = np.sqrt((X - puntos_x_rk4[i])**2 + (Y - puntos_y_rk4[i])**2)
         densidad += np.exp(-(distancia**2) / (2 * sigma**2))
 
-    if np.max(densidad) > 0:
-        densidad = densidad / np.max(densidad)
-
     fig2, ax2 = plt.subplots()
 
     n = 256
@@ -76,13 +69,12 @@ def mapa_rk4():
     plt.contourf(X, Y, densidad, levels=20, cmap=cmap)
     plt.colorbar(label='Nivel de Riesgo')
 
-    plt.xlabel('X (km)')
-    plt.ylabel('Y (km)')
+    plt.xlabel('Distancia Escala 1:100')
+    plt.ylabel('Distancia Escala 1:100')
     plt.title('Mapa de Riesgo Volcánico (RK4)')
-    plt.axis('equal')
     plt.grid(True, alpha=0.3)
 
-    scalebar = ScaleBar(100, 'm', length_fraction=0.25, location='lower left', box_alpha=0.7, color='black', font_properties={'size': 10})
+    scalebar = ScaleBar(100, 'm', length_fraction=0.25, location='lower left', color='black')
     ax2.add_artist(scalebar)
 
     plt.savefig('mapa_riesgo_rk4.png',dpi=300)
